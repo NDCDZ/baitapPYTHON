@@ -28,12 +28,18 @@ def isPalindrome(x: int) -> bool:
     soGoc = x 
     soDaoNguoc = 0
     
-    # Đảo ngược số
+    
     while x > 0:
         so = x % 10
         soDaoNguoc = soDaoNguoc * 10 + so
         x //= 10
-    
+#     Ban đầu, doDaoNguoc = 0 .
+# Mỗi lần lặp, soDaoNguoc được nhân với 10 (dịch trái các chữ số hiện có) và cộng thêm các chữ số mới ( so ).
+# Ví dụ, với x = 123 :
+# Lần 1: so = 3 , soDaoNguc = 0 * 10 + 3 = 3 , x = 12 .
+# Lần 2: so = 2 , soDaoNguc = 3 * 10 + 2 = 32 , x = 1 .
+# Lần 3: so = 1 , soDaoNguc = 32 * 10 + 1 = 321 , x = 0 .
+# Kết quả là soDaoNguoc = 321 , tức là số đảo ngược của 123 .
 
     return soGoc == soDaoNguoc
 
