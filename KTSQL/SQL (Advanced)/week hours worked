@@ -1,0 +1,24 @@
+WITH PairedTimestamps AS (
+    SELECT 
+        emp_id,
+        DATE(timestamp) AS work_date,
+        MIN(timestamp) AS login_time,
+        MAX(timestamp) AS logout_time
+    FROM 
+        attendance
+    WHERE 
+        YEAR(timestamp) = 2021 
+        AND MONTH(timestamp) = 7
+        AND DAYOFWEEK(timestamp) IN (1, 7)
+    GROUP BY 
+        emp_id, DATE(timestamp)
+)
+SELECT 
+    emp_id,
+    SUM(FLOOR(TIMESTAMPDIFF(HOUR, login_time, logout_time))) AS work_hours
+FROM 
+    PairedTimestamps
+GROUP BY 
+    emp_id
+ORDER BY 
+    work_hours DESC;
